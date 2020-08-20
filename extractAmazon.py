@@ -16,10 +16,14 @@ from bs4 import BeautifulSoup as bs
 import re
 import os
 header = """
-            <style>
+<html>
+<head><title>Product Description</title>
+
+<style>
 table {
   border-collapse: collapse;
   width: 100%;
+  border: 1px solid black;
 }
 
 th, td {
@@ -35,14 +39,16 @@ a.clickb:link{
   display: block;
   margin-right: auto;
   margin-left: auto;
-  width: 100px;
   color: #ffffff;
+  width: 200px;
+  box-sizing: border-box;
   background-color: rgb(13, 13, 13);
   border: 1px solid rgb(13, 13, 13);
   border-radius: 5px;
+  text-align: center;
   }
 
-a:clickb:hover:{
+a.clickb:hover{
 
   border: 1px solid rgb(13, 13, 13);
   background-color: #ffffff;
@@ -52,9 +58,14 @@ a:clickb:hover:{
  }
 
 </style>
-
+</head>
+<body>
 
         """
+headerclose="""
+</body>
+</html>
+"""
 
 im = input("Enter Affiliate Image Link\n")
 
@@ -244,4 +255,5 @@ with open(pathdestination,"w") as file:
 
     file.write("<a class=\"clickb\" href=\""+al+"\">Buy At Amazon</a>\n")
     file.write("<div><br /></div>")
+    file.write(headerclose)
 print("Your file is saved At:\n",pathdestination)
