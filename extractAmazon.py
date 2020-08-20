@@ -15,7 +15,46 @@ Created on Wed Aug 19 12:50:05 2020
 from bs4 import BeautifulSoup as bs
 import re
 import os
+header = """
+            <style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+a.clickb:link{
+
+  padding: 10px 12px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100px;
+  color: #ffffff;
+  background-color: rgb(13, 13, 13);
+  border: 1px solid rgb(13, 13, 13);
+  border-radius: 5px;
+  }
+
+a:clickb:hover:{
+
+  border: 1px solid rgb(13, 13, 13);
+  background-color: #ffffff;
+  color: rgb(13, 13, 13);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+ }
+
+</style>
+
+
+        """
 
 im = input("Enter Affiliate Image Link\n")
 
@@ -25,7 +64,7 @@ productfile = input("Enter Product File path\n")
 
 filename=input("Enter File NAme\n")
 
-pathdestination = os.path.join(os.environ["HOME"],"Desktop",filename+".txt")
+pathdestination = os.path.join(os.environ["HOME"],"Desktop",filename+".html")
 
 with open(productfile) as web:
 
@@ -93,6 +132,8 @@ for i in table.tbody.contents:
     #print(type(i))
 
 with open(pathdestination,"w") as file:
+
+    file.write(header+"\n")
 
     if "Series" in data["Product"].keys():
         model = "Series"
@@ -203,4 +244,4 @@ with open(pathdestination,"w") as file:
 
     file.write("<a class=\"clickb\" href=\""+al+"\">Buy At Amazon</a>\n")
     file.write("<div><br /></div>")
-print("Your file is saved At:\n",pathdestination)   
+print("Your file is saved At:\n",pathdestination)
